@@ -5,8 +5,8 @@ var memoryItems = [ 'PR I', 'PR I', 'PR II', 'PR II', 'PR III', 'PR III', 'ADS',
                      'ASP', 'ASP', 'EJ I', 'EJ I' ];
 var selectedItemValue = null;
 var selectedItemID = null;
-var tiles_flipped = 0;
-var fliped = 0;
+var flippedTiles = 0;
+var flipped = 0;
 
 Array.prototype.randomizeTiles = function () {
     let i = 0;
@@ -22,26 +22,26 @@ Array.prototype.randomizeTiles = function () {
 
 const flipTile = e => {
     var div = e.target;
-    if ((div.innerHTML == "" || div.innerHTML == null) && fliped < 2) {
+    if ((div.innerHTML == "" || div.innerHTML == null) && flipped < 2) {
         div.innerHTML = memoryItems[Math.floor(div.id)];
         div.classList.add("clicked");
-        if (fliped == 0) {
-            fliped++;
+        if (flipped == 0) {
+            flipped++;
             selectedItemID = div.id;
             selectedItemValue = memoryItems[Math.floor(div.id)];
-        } else if (fliped == 1) {
-            fliped++;
+        } else if (flipped == 1) {
+            flipped++;
             if (selectedItemValue == memoryItems[Math.floor(div.id)]) {
-                tiles_flipped += 2;
-                fliped = 0;
-                if (tiles_flipped == memoryItems.length) {
+                flippedTiles += 2;
+                flipped = 0;
+                if (flippedTiles == memoryItems.length) {
                     alert("Congratulations...");
                     generateBoard();
                 }
             } else {
 
                 setTimeout( () => {
-                    fliped = 0;
+                    flipped = 0;
                     console.log(selectedItemID)
                     console.log(div);
                     let previousDiv = document.getElementById(selectedItemID);
@@ -56,7 +56,7 @@ const flipTile = e => {
 };
 const generateBoard = () => {
     console.log("Generating board...");
-    fliped = 0;
+    flipped = 0;
     memoryItems.randomizeTiles();
     let board = document.getElementById("board");
     board.innerHTML = "";
