@@ -22,7 +22,7 @@ Array.prototype.randomizeTiles = function () {
 
 const flipTile = e => {
     var div = e.target;
-    if ((div.innerHTML == "" || div.innerHTML == null) && flipped < 2) {
+    if (!(div.innerHTML == "" || div.innerHTML == null) && flipped < 2) {
         div.innerHTML = memoryItems[Math.floor(div.id)];
         div.classList.add("clicked");
         if (flipped == 0) {
